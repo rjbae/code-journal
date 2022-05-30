@@ -29,22 +29,22 @@
       </div>
     </div>
     <div data-view="entry-form">
-      <form>
+      <form class="form">
         <div class="row">
           <div class="column-half">
             <img class="placeholder-img" alt="placeholder image" src="images/placeholder-image-square.jpg">
           </div>
           <div class="column-half">
             <p><label for="title">Title</label></p>
-            <input type="text" class="title" required>
+            <input name="title" type="text" class="title" required>
             <p><label for="photoUrl">Photo URL</label></p>
-            <input type="url" class="photo-url" required>
+            <input name="photoUrl" type="url" class="photo-url" required>
           </div>
         </div>
         <div class="row">
           <div class="column-full">
             <p><label for="notes">Notes</label></p>
-            <textarea rows="10" class="notes" required></textarea>
+            <textarea name="notes" rows="10" class="notes" required></textarea>
           </div>
         </div>
         <div class="row save">

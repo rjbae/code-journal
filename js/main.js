@@ -8,11 +8,11 @@ function updatePhoto(event) {
   $placeHolderImg.setAttribute('src', newUrl);
 }
 
-var $form = document.querySelector('form');
+var $form = document.querySelector('.form');
 $form.addEventListener('submit', formEvent);
 
 function formEvent(event) {
-  event.preventDefaul();
+  event.preventDefault();
   var formEntry = {};
   formEntry.title = $form.elements.title.value;
   formEntry.photoUrl = $form.elements.photoUrl.value;
