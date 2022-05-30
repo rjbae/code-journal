@@ -36,20 +36,20 @@
           </div>
           <div class="column-half">
             <p><label for="title">Title</label></p>
-            <input type="text" id="title">
+            <input type="text" id="title" required>
             <p><label for="photourl">Photo URL</label></p>
-            <input type="text" id="photourl">
+            <input type="url" id="photourl" required>
           </div>
         </div>
         <div class="row">
           <div class="column-full">
             <p><label for="notes" class="notes">Notes</label></p>
-            <textarea rows="10"></textarea>
+            <textarea rows="10" required></textarea>
           </div>
         </div>
         <div class="row save-button">
           <div class="column-full">
-            <input type="button" id="save-button" value="SAVE">
+            <button type="button" id="save-button">SAVE</button>
           </div>
         </div>
       </form>
