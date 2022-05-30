@@ -23,8 +23,8 @@ label {
   font-family: "Proza Libre", serif;
 }
 
-#title,
-#photourl {
+.title,
+.photo-url {
   width: 100%;
   line-height: 2.5em;
   border-radius: 5px;
@@ -41,7 +41,7 @@ textarea {
   font-size: 16px;
 }
 
-#save-button {
+.save-button {
   background-color: purple;
   color: white;
   border: none;
@@ -55,7 +55,7 @@ textarea {
   cursor: pointer;
 }
 
-.save-button {
+.save {
   text-align: right;
 }
 
