@@ -68,3 +68,17 @@ input:focus {
 textarea:focus {
   outline-color: purple;
 }
+
+.new-button {
+  background-color: purple;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  max-width: 100%;
+  width: 70px;
+  height: 30px;
+  font-size: 16px;
+  margin-top: 15px;
+  margin-bottom: 20%;
+  cursor: pointer;
+}
