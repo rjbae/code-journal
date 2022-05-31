@@ -59,12 +59,41 @@ function entryList(entry) {
   return list;
 }
 
-var list = document.querySelector('.entries-list');
+var $list = document.querySelector('.entries-list');
 document.addEventListener('DOMContentLoaded', DOMContentLoaded);
 
 function DOMContentLoaded(event) {
   for (var i = 0; i < data.entries.length; i++) {
     var entry = entryList(data.entries[i]);
-    list.appendChild(entry);
+    $list.appendChild(entry);
   }
+}
+
+var $entriesNav = document.querySelector('.nav-entry');
+var $saveButton = document.querySelector('.save-button');
+var $newButton = document.querySelector('.new-button');
+
+var $entries = document.querySelector('.entries');
+var $entryForm = document.querySelector('.entry-form');
+
+$entriesNav.addEventListener('click', viewEntries);
+$saveButton.addEventListener('click', viewEntries);
+$newButton.addEventListener('click', newEntries);
+
+function viewEntries(event) {
+  $entries.className = 'container entries';
+  $entryForm.className = 'container entry-form hidden';
+  data.view = 'entries';
+}
+
+function newEntries(event) {
+  $entries.className = 'container entries hidden';
+  $entryForm.className = 'container entry-form';
+  data.view = 'entry-form';
+}
+
+if (data.view === 'entry-form') {
+  newEntries();
+} else {
+  viewEntries();
 }

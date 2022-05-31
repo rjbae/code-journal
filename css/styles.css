@@ -46,7 +46,7 @@ textarea {
 .save-button {
   background-color: purple;
   color: white;
-  padding: 10px;
+  padding: 12px 14px;
   border-radius: 5px;
   cursor: pointer;
   font-family: sans-serif;
@@ -70,7 +70,7 @@ textarea:focus {
 .new-button {
   background-color: purple;
   color: white;
-  padding: 12px;
+  padding: 12px 16px;
   border-radius: 5px;
   cursor: pointer;
   font-family: sans-serif;
