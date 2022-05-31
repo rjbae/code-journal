@@ -21,6 +21,9 @@ function formEvent(event) {
   data.nextEntryId++;
   data.entries.unshift(formEntry);
   $placeHolderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $list.prepend(entryList(formEntry));
+  viewEntries();
+  $placeHolderText.className = 'place-holder-text hidden';
   $form.reset();
 }
 
@@ -70,14 +73,13 @@ function DOMContentLoaded(event) {
 }
 
 var $entriesNav = document.querySelector('.nav-entry');
-var $saveButton = document.querySelector('.save-button');
 var $newButton = document.querySelector('.new-button');
+var $placeHolderText = document.querySelector('.place-holder-text');
 
 var $entries = document.querySelector('.entries');
 var $entryForm = document.querySelector('.entry-form');
 
 $entriesNav.addEventListener('click', viewEntries);
-$saveButton.addEventListener('click', viewEntries);
 $newButton.addEventListener('click', newEntries);
 
 function viewEntries(event) {
@@ -96,4 +98,5 @@ if (data.view === 'entry-form') {
   newEntries();
 } else {
   viewEntries();
+  $placeHolderText.className = 'place-holder-text hidden';
 }
