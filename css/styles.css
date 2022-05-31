@@ -78,7 +78,31 @@ textarea:focus {
   width: 70px;
   height: 30px;
   font-size: 16px;
-  margin-top: 15px;
-  margin-bottom: 20%;
   cursor: pointer;
+}
+
+.entries-list {
+  list-style: none;
+}
+
+.entry-img {
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 3em;
+  padding-top: 2em;
+}
+
+.entries-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h3 {
+  font-family: "Proza Libre", serif;
+}
+
+p {
+  font-family: sans-serif;
+  line-height: 2em;
 }
