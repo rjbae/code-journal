@@ -19,10 +19,13 @@
 <body>
   <header>
     <div class="container">
-      <h2>Code Journal</h2>
+      <div class="row">
+        <h2>Code Journal</h2>
+        <h3 class="nav"><a href="#entries">Entries</a></h3>
+      </div>
     </div>
   </header>
-  <div class="container hidden">
+  <div class="container">
     <div class="row">
       <div class="column-full">
         <h1>New Entry</h1>
@@ -49,7 +52,7 @@
         </div>
         <div class="row save">
           <div class="column-full">
-            <button type="submit" class="save-button">SAVE</button>
+            <a href="#entries" class="save-button">SAVE</a>
           </div>
         </div>
       </form>
@@ -60,7 +63,7 @@
       <div class="column-full">
         <div class="entries-header">
           <h1>Entries</h1>
-          <button type="submit" class="new-button">NEW</button>
+          <a href="#entry-form" class="new-button">NEW</a>
         </div>
       </div>
     </div>

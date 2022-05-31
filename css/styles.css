@@ -46,19 +46,17 @@ textarea {
 .save-button {
   background-color: purple;
   color: white;
-  border: none;
+  padding: 10px;
   border-radius: 5px;
-  max-width: 100%;
-  width: 70px;
-  height: 30px;
-  font-size: 16px;
-  margin-top: 15px;
-  margin-bottom: 20%;
   cursor: pointer;
+  font-family: sans-serif;
+  font-size: 16px;
 }
 
 .save {
   text-align: right;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 input:focus {
@@ -72,13 +70,11 @@ textarea:focus {
 .new-button {
   background-color: purple;
   color: white;
-  border: none;
+  padding: 12px;
   border-radius: 5px;
-  max-width: 100%;
-  width: 70px;
-  height: 30px;
-  font-size: 16px;
   cursor: pointer;
+  font-family: sans-serif;
+  font-size: 16px;
 }
 
 .entries-list {
@@ -88,8 +84,9 @@ textarea:focus {
 .entry-img {
   width: 100%;
   object-fit: cover;
-  margin-bottom: 3em;
+  margin-bottom: 2em;
   padding-top: 2em;
+  padding-right: 2em;
 }
 
 .entries-header {
@@ -105,4 +102,15 @@ h3 {
 p {
   font-family: sans-serif;
   line-height: 2em;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  margin-left: 2em;
 }
