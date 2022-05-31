@@ -23,7 +23,6 @@ function formEvent(event) {
   $placeHolderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $list.prepend(entryList(formEntry));
   viewEntries();
-  $placeHolderText.className = 'place-holder-text hidden';
   $form.reset();
 }
 
@@ -74,7 +73,6 @@ function DOMContentLoaded(event) {
 
 var $entriesNav = document.querySelector('.nav-entry');
 var $newButton = document.querySelector('.new-button');
-var $placeHolderText = document.querySelector('.place-holder-text');
 
 var $entries = document.querySelector('.entries');
 var $entryForm = document.querySelector('.entry-form');
@@ -98,5 +96,4 @@ if (data.view === 'entry-form') {
   newEntries();
 } else {
   viewEntries();
-  $placeHolderText.className = 'place-holder-text hidden';
 }
