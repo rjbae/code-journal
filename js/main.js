@@ -50,6 +50,10 @@ function entryList(entry) {
   header.textContent = entry.title;
   columnHalf.appendChild(header);
 
+  var icon = document.createElement('i');
+  icon.setAttribute('class', 'fa-solid fa-pencil');
+  header.appendChild(icon);
+
   var entryText = document.createElement('div');
   entryText.setAttribute('class', 'entry-text');
   columnHalf.appendChild(entryText);
