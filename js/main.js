@@ -69,6 +69,11 @@ function domContentLoaded(event) {
     var entry = entryList(data.entries[i]);
     $list.appendChild(entry);
   }
+  if (data.view === 'entry-form') {
+    newEntries();
+  } else {
+    viewEntries();
+  }
 }
 
 var $entriesNav = document.querySelector('.nav-entry');
@@ -90,10 +95,4 @@ function newEntries(event) {
   $entries.className = 'container entries hidden';
   $entryForm.className = 'container entry-form';
   data.view = 'entry-form';
-}
-
-if (data.view === 'entry-form') {
-  newEntries();
-} else {
-  viewEntries();
 }
