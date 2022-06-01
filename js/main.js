@@ -28,6 +28,7 @@ function formEvent(event) {
 
 function entryList(entry) {
   var list = document.createElement('li');
+  list.setAttribute('data-entry-id', entry.entryId);
 
   var row = document.createElement('div');
   row.setAttribute('class', 'row');
