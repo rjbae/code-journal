@@ -53,6 +53,7 @@ function entryList(entry) {
 
   var icon = document.createElement('i');
   icon.setAttribute('class', 'fa-solid fa-pencil');
+  icon.setAttribute('data-entry-id', entry.entryId);
   header.appendChild(icon);
 
   var entryText = document.createElement('div');
@@ -100,4 +101,10 @@ function newEntries(event) {
   $entries.className = 'container entries hidden';
   $entryForm.className = 'container entry-form';
   data.view = 'entry-form';
+}
+
+$list.addEventListener('click', editEvent);
+
+function editEvent(event) {
+
 }
