@@ -62,9 +62,9 @@ function entryList(entry) {
 }
 
 var $list = document.querySelector('.entries-list');
-document.addEventListener('DOMContentLoaded', DOMContentLoaded);
+document.addEventListener('DOMContentLoaded', domContentLoaded);
 
-function DOMContentLoaded(event) {
+function domContentLoaded(event) {
   for (var i = 0; i < data.entries.length; i++) {
     var entry = entryList(data.entries[i]);
     $list.appendChild(entry);
