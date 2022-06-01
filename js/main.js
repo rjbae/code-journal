@@ -106,5 +106,7 @@ function newEntries(event) {
 $list.addEventListener('click', editEvent);
 
 function editEvent(event) {
-
+  if (event.target.tagName === 'I') {
+    newEntries();
+  }
 }
