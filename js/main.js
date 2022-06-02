@@ -77,6 +77,7 @@ function entryList(entry) {
   entryText.appendChild(text);
 
   return list;
+
 }
 
 var $list = document.querySelector('.entries-list');
@@ -113,6 +114,7 @@ function newEntries(event) {
   $entries.className = 'container entries hidden';
   $entryForm.className = 'container entry-form';
   $title.textContent = 'New Entry';
+  $deleteButton.className = 'delete-entry hidden';
   data.view = 'entry-form';
 }
 
@@ -133,6 +135,7 @@ function editEvent(event) {
   $form.photoUrl.value = entryObj.photoUrl;
   $placeHolderImg.setAttribute('src', entryObj.photoUrl);
   $form.notes.value = entryObj.notes;
+  $deleteButton.className = 'delete-entry';
 }
 
 function getEntryObj(entryList) {
@@ -144,3 +147,5 @@ function getEntryObj(entryList) {
     }
   }
 }
+
+var $deleteButton = document.querySelector('.delete-entry');

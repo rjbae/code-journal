@@ -127,3 +127,18 @@ i {
   cursor: pointer;
   color: purple;
 }
+
+.delete-entry {
+  background-color: white;
+  border: none;
+  color: red;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.column-full.save {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+}
