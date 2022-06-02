@@ -98,6 +98,9 @@ textarea:focus {
 
 h3 {
   font-family: "Proza Libre", serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 p {
@@ -118,4 +121,9 @@ a {
 
 .place-holder-text {
   text-align: center;
+}
+
+i {
+  cursor: pointer;
+  color: purple;
 }
