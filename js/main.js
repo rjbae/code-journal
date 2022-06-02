@@ -13,17 +13,29 @@ $form.addEventListener('submit', formEvent);
 
 function formEvent(event) {
   event.preventDefault();
-  var formEntry = {};
-  formEntry.title = $form.elements.title.value;
-  formEntry.photoUrl = $form.elements.photoUrl.value;
-  formEntry.notes = $form.elements.notes.value;
-  formEntry.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(formEntry);
+  if (data.editing === null) {
+    var entryObj = {};
+    entryObj.entryId = data.nextEntryId;
+  } else {
+    var list = data.editing;
+    entryObj = getEntryObj(list);
+  }
+  entryObj.title = $form.elements.title.value;
+  entryObj.photoUrl = $form.elements.photoUrl.value;
+  entryObj.notes = $form.elements.notes.value;
   $placeHolderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $list.prepend(entryList(formEntry));
+
+  var entriesList = entryList(entryObj);
+  if (data.editing === null) {
+    $list.prepend(entriesList);
+    data.entries.unshift(entryObj);
+    data.nextEntryId++;
+  } else {
+    list.replaceWith(entriesList);
+  }
   viewEntries();
   $form.reset();
+  data.editing = null;
 }
 
 function entryList(entry) {
@@ -100,13 +112,35 @@ function viewEntries(event) {
 function newEntries(event) {
   $entries.className = 'container entries hidden';
   $entryForm.className = 'container entry-form';
+  $title.textContent = 'New Entry';
   data.view = 'entry-form';
 }
 
 $list.addEventListener('click', editEvent);
+var $title = document.querySelector('h1');
 
 function editEvent(event) {
-  if (event.target.tagName === 'I') {
-    newEntries();
+  if (event.target.tagName !== 'I') {
+    return;
+  }
+  newEntries();
+  var entryList = event.target.closest('li');
+  data.editing = entryList;
+  $title.textContent = 'Edit Entry';
+  var entryObj = getEntryObj(entryList);
+
+  $form.title.value = entryObj.title;
+  $form.photoUrl.value = entryObj.photoUrl;
+  $placeHolderImg.setAttribute('src', entryObj.photoUrl);
+  $form.notes.value = entryObj.notes;
+}
+
+function getEntryObj(entryList) {
+  var entryId = parseInt(entryList.getAttribute('data-entry-id'));
+  for (var i = 0; i < data.entries.length; i++) {
+    if (entryId === data.entries[i].entryId) {
+      var entryObj = data.entries[i];
+      return entryObj;
+    }
   }
 }
