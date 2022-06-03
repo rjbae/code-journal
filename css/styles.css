@@ -142,3 +142,37 @@ i {
   justify-content: space-between;
   margin-top: 0;
 }
+
+.modal-content {
+  background-color: blue;
+  min-width: 25%;
+  max-width: 45%;
+  padding: 18px;
+  font-family: sans-serif;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.row.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel-button {
+  border-radius: 5px;
+  background-color: lightgrey;
+  border: none;
+  padding: 6px;
+}
+
+.confirm-button {
+  border-radius: 5px;
+  background-color: red;
+  border: none;
+  color: white;
+}
+
+.modal-container {
+  display: flex;
+  justify-content: center;
+}

@@ -77,7 +77,6 @@ function entryList(entry) {
   entryText.appendChild(text);
 
   return list;
-
 }
 
 var $list = document.querySelector('.entries-list');
@@ -149,3 +148,8 @@ function getEntryObj(entryList) {
 }
 
 var $deleteButton = document.querySelector('.delete-entry');
+$deleteButton.addEventListener('click', openModal);
+
+function openModal(event) {
+
+}
