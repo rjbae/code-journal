@@ -23,7 +23,6 @@ function formEvent(event) {
   entryObj.title = $form.elements.title.value;
   entryObj.photoUrl = $form.elements.photoUrl.value;
   entryObj.notes = $form.elements.notes.value;
-  $placeHolderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
 
   var entriesList = entryList(entryObj);
   if (data.editing === null) {
@@ -34,12 +33,11 @@ function formEvent(event) {
     list.replaceWith(entriesList);
   }
   viewEntries();
-  $form.reset();
-  data.editing = null;
 }
 
 function entryList(entry) {
   var list = document.createElement('li');
+  list.className = 'entry';
   list.setAttribute('data-entry-id', entry.entryId);
 
   var row = document.createElement('div');
@@ -107,14 +105,17 @@ function viewEntries(event) {
   $entries.className = 'container entries';
   $entryForm.className = 'container entry-form hidden';
   data.view = 'entries';
+  $deleteButton.className = 'hidden';
+  data.editing = null;
 }
 
 function newEntries(event) {
   $entries.className = 'container entries hidden';
   $entryForm.className = 'container entry-form';
   $title.textContent = 'New Entry';
-  $deleteButton.className = 'delete-entry hidden';
   data.view = 'entry-form';
+  $form.reset();
+  $placeHolderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
 }
 
 $list.addEventListener('click', editEvent);
@@ -125,6 +126,7 @@ function editEvent(event) {
     return;
   }
   newEntries();
+  $deleteButton.className = 'delete-entry';
   var entryList = event.target.closest('li');
   data.editing = entryList;
   $title.textContent = 'Edit Entry';
@@ -134,13 +136,12 @@ function editEvent(event) {
   $form.photoUrl.value = entryObj.photoUrl;
   $placeHolderImg.setAttribute('src', entryObj.photoUrl);
   $form.notes.value = entryObj.notes;
-  $deleteButton.className = 'delete-entry';
 }
 
 function getEntryObj(entryList) {
-  var entryId = parseInt(entryList.getAttribute('data-entry-id'));
+  var entryId = entryList.getAttribute('data-entry-id');
   for (var i = 0; i < data.entries.length; i++) {
-    if (entryId === data.entries[i].entryId) {
+    if (entryId === data.entries[i].entryId.toString()) {
       var entryObj = data.entries[i];
       return entryObj;
     }
@@ -148,8 +149,40 @@ function getEntryObj(entryList) {
 }
 
 var $deleteButton = document.querySelector('.delete-entry');
+var $cancelButton = document.querySelector('.cancel-button');
+var $confirmButton = document.querySelector('.confirm-button');
+
+var $modalContainer = document.querySelector('.modal-container');
+var $modalContent = document.querySelector('.modal-content');
+
 $deleteButton.addEventListener('click', openModal);
-
 function openModal(event) {
+  $modalContainer.className = 'modal-container background';
+  $modalContent.className = 'modal-content';
+}
 
+$cancelButton.addEventListener('click', cancelEvent);
+function cancelEvent(event) {
+  $modalContainer.className = 'hidden';
+  $modalContent.className = 'hidden';
+}
+
+$confirmButton.addEventListener('click', confirmEvent);
+function confirmEvent(event) {
+  var list = data.editing;
+  var entryId = list.getAttribute('data-entry-id');
+
+  var listNodes = document.querySelectorAll('.entry');
+  for (var i = 0; i < listNodes.length; i++) {
+    if (listNodes[i].getAttribute('data-entry-id') === entryId) {
+      listNodes[i].remove();
+    }
+  }
+  for (var j = 0; j < data.entries.length; j++) {
+    if (entryId === data.entries[i].entryId.toString()) {
+      data.entries.splice(i, 1);
+    }
+  }
+  cancelEvent();
+  viewEntries();
 }
