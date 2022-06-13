@@ -23,7 +23,6 @@ function formEvent(event) {
   entryObj.title = $form.elements.title.value;
   entryObj.photoUrl = $form.elements.photoUrl.value;
   entryObj.notes = $form.elements.notes.value;
-  $placeHolderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
 
   var entriesList = entryList(entryObj);
   if (data.editing === null) {
@@ -34,12 +33,11 @@ function formEvent(event) {
     list.replaceWith(entriesList);
   }
   viewEntries();
-  $form.reset();
-  data.editing = null;
 }
 
 function entryList(entry) {
   var list = document.createElement('li');
+  list.className = 'entry';
   list.setAttribute('data-entry-id', entry.entryId);
 
   var row = document.createElement('div');
@@ -87,11 +85,6 @@ function domContentLoaded(event) {
     var entry = entryList(data.entries[i]);
     $list.appendChild(entry);
   }
-  if (data.view === 'entry-form') {
-    newEntries();
-  } else {
-    viewEntries();
-  }
 }
 
 var $entriesNav = document.querySelector('.nav-entry');
@@ -107,12 +100,20 @@ function viewEntries(event) {
   $entries.className = 'container entries';
   $entryForm.className = 'container entry-form hidden';
   data.view = 'entries';
+  $deleteButton.className = 'hidden';
+  data.editing = null;
 }
 
 function newEntries(event) {
+  $title.textContent = 'New Entry';
+  $form.reset();
+  $placeHolderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  viewEntryForm();
+}
+
+function viewEntryForm(event) {
   $entries.className = 'container entries hidden';
   $entryForm.className = 'container entry-form';
-  $title.textContent = 'New Entry';
   data.view = 'entry-form';
 }
 
@@ -123,11 +124,13 @@ function editEvent(event) {
   if (event.target.tagName !== 'I') {
     return;
   }
-  newEntries();
+  viewEntryForm();
+  $deleteButton.className = 'delete-entry';
+
   var entryList = event.target.closest('li');
   data.editing = entryList;
-  $title.textContent = 'Edit Entry';
   var entryObj = getEntryObj(entryList);
+  $title.textContent = 'Edit Entry';
 
   $form.title.value = entryObj.title;
   $form.photoUrl.value = entryObj.photoUrl;
@@ -136,11 +139,53 @@ function editEvent(event) {
 }
 
 function getEntryObj(entryList) {
-  var entryId = parseInt(entryList.getAttribute('data-entry-id'));
+  var entryId = entryList.getAttribute('data-entry-id');
   for (var i = 0; i < data.entries.length; i++) {
-    if (entryId === data.entries[i].entryId) {
+    if (entryId === data.entries[i].entryId.toString()) {
       var entryObj = data.entries[i];
       return entryObj;
     }
   }
+}
+
+var $deleteButton = document.querySelector('.delete-entry');
+var $cancelButton = document.querySelector('.cancel-button');
+var $confirmButton = document.querySelector('.confirm-button');
+
+var $modalContainer = document.querySelector('.modal-container');
+
+$deleteButton.addEventListener('click', openModal);
+function openModal(event) {
+  $modalContainer.className = 'modal-container background';
+}
+
+$cancelButton.addEventListener('click', cancelEvent);
+function cancelEvent(event) {
+  $modalContainer.className = 'hidden';
+}
+
+$confirmButton.addEventListener('click', confirmEvent);
+function confirmEvent(event) {
+  var list = document.querySelector('.entry');
+  var entryId = list.getAttribute('data-entry-id');
+
+  var entryNodes = document.querySelectorAll('.entry');
+  for (var i = 0; i < entryNodes.length; i++) {
+    if (entryNodes[i].getAttribute('data-entry-id') === entryId) {
+      entryNodes[i].remove();
+    }
+  }
+  for (i = 0; i < data.entries.length; i++) {
+    if (entryId === data.entries[i].entryId.toString()) {
+      data.entries.splice(i, 1);
+    }
+  }
+  cancelEvent();
+  viewEntries();
+}
+
+if (data.view === 'entry--form') {
+  viewEntryForm();
+} else {
+  viewEntries();
 }
