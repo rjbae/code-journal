@@ -85,11 +85,6 @@ function domContentLoaded(event) {
     var entry = entryList(data.entries[i]);
     $list.appendChild(entry);
   }
-  if (data.view === 'entry-form') {
-    newEntries();
-  } else {
-    viewEntries();
-  }
 }
 
 var $entriesNav = document.querySelector('.nav-entry');
@@ -110,12 +105,16 @@ function viewEntries(event) {
 }
 
 function newEntries(event) {
-  $entries.className = 'container entries hidden';
-  $entryForm.className = 'container entry-form';
   $title.textContent = 'New Entry';
-  data.view = 'entry-form';
   $form.reset();
   $placeHolderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  viewEntryForm();
+}
+
+function viewEntryForm(event) {
+  $entries.className = 'container entries hidden';
+  $entryForm.className = 'container entry-form';
+  data.view = 'entry-form';
 }
 
 $list.addEventListener('click', editEvent);
@@ -125,12 +124,13 @@ function editEvent(event) {
   if (event.target.tagName !== 'I') {
     return;
   }
-  newEntries();
+  viewEntryForm();
   $deleteButton.className = 'delete-entry';
+
   var entryList = event.target.closest('li');
   data.editing = entryList;
-  $title.textContent = 'Edit Entry';
   var entryObj = getEntryObj(entryList);
+  $title.textContent = 'Edit Entry';
 
   $form.title.value = entryObj.title;
   $form.photoUrl.value = entryObj.photoUrl;
@@ -153,36 +153,39 @@ var $cancelButton = document.querySelector('.cancel-button');
 var $confirmButton = document.querySelector('.confirm-button');
 
 var $modalContainer = document.querySelector('.modal-container');
-var $modalContent = document.querySelector('.modal-content');
 
 $deleteButton.addEventListener('click', openModal);
 function openModal(event) {
   $modalContainer.className = 'modal-container background';
-  $modalContent.className = 'modal-content';
 }
 
 $cancelButton.addEventListener('click', cancelEvent);
 function cancelEvent(event) {
   $modalContainer.className = 'hidden';
-  $modalContent.className = 'hidden';
 }
 
 $confirmButton.addEventListener('click', confirmEvent);
 function confirmEvent(event) {
-  var list = data.editing;
+  var list = document.querySelector('.entry');
   var entryId = list.getAttribute('data-entry-id');
 
-  var listNodes = document.querySelectorAll('.entry');
-  for (var i = 0; i < listNodes.length; i++) {
-    if (listNodes[i].getAttribute('data-entry-id') === entryId) {
-      listNodes[i].remove();
+  var entryNodes = document.querySelectorAll('.entry');
+  for (var i = 0; i < entryNodes.length; i++) {
+    if (entryNodes[i].getAttribute('data-entry-id') === entryId) {
+      entryNodes[i].remove();
     }
   }
-  for (var j = 0; j < data.entries.length; j++) {
+  for (i = 0; i < data.entries.length; i++) {
     if (entryId === data.entries[i].entryId.toString()) {
       data.entries.splice(i, 1);
     }
   }
   cancelEvent();
+  viewEntries();
+}
+
+if (data.view === 'entry--form') {
+  viewEntryForm();
+} else {
   viewEntries();
 }
